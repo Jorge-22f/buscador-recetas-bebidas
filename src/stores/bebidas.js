@@ -1,4 +1,4 @@
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, onMounted, computed } from 'vue'
 import { defineStore } from 'pinia'
 import APIService from '@/services/APIService'
 import { useModalStore } from './Modal'
@@ -11,6 +11,7 @@ export const useBebidasStore = defineStore('bebidas', () => {
 		categoria: '',
 	})
 	const recetas = ref([])
+	const receta = ref({})
 
 	onMounted(async function () {
 		const {
@@ -30,16 +31,20 @@ export const useBebidasStore = defineStore('bebidas', () => {
 		const {
 			data: { drinks },
 		} = await APIService.buscarReceta(id)
-		console.log(drinks[0])
+		receta.value = drinks[0]
 
 		modal.handleClickModal()
 	}
 
+	const noRecetas = computed(() => recetas.value.length === 0)
+
 	return {
 		categorias,
 		busqueda,
-		obtenerRecetas,
 		recetas,
+		receta,
+		noRecetas,
+		obtenerRecetas,
 		seleccionarBebida,
 	}
 })

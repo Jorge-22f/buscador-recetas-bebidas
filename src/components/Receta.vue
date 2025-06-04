@@ -13,7 +13,7 @@ defineProps({
 <template>
     <div class="border shadow-lg">
         <div class="overflow-hidden">
-            <img class="hover:scale-110 transition-transform hover:rotate-1" :src="receta.strDrinkThumb"
+            <img class="hover:scale-110 transition-transform hover:rotate-1 mx-auto" :src="receta.strDrinkThumb"
                 :alt="'Imagen de ' + receta.strDrink" />
         </div>
         <div class="p-5">
